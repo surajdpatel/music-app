@@ -1,0 +1,42 @@
+<div class="container">
+    <form [formGroup]="uploadMusic_fg">
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field style="width: 100%;">
+                            <input type="text" matInput placeholder="Song Name" #songName formControlName="songName">
+                            <mat-error *ngIf="uploadMusic_fg.controls?.songName?.errors?.required">Please enter song
+                                name </mat-error>
+                            <mat-error
+                                *ngIf="uploadMusic_fg.controls?.songName?.errors?.maxlength || uploadMusic_fg.controls?.songName?.errors?.minlength">
+                                Enter song name within 3 to 20 characters</mat-error>
+
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <input style="display: none;" type="file" (change)="uploadFiles($event)" accept="audio/*" #file>
+                        <button style="margin-top: 12px;" mat-raised-button color="primary"
+                            (click)="file.click()">Choose
+                            file</button>
+                        <img *ngIf="currentFile!==null" class="imgsound" src="assets/images/musicalnote.png"
+                            alt="musicnote">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+        <div *ngIf="showUploadButton" style="text-align: center;">
+            <button mat-raised-button color="accent" (click)="submitDetail()">Upload detail</button>
+        </div>
+
+        <div *ngIf="uploadWheel" class="loading-indicator">
+            <mat-spinner></mat-spinner>
+        </div>
+    </form>
+
+</div>
